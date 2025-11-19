@@ -24,6 +24,39 @@ int Password::count_leading_characters(string phrase){
   receives a string and returns whether it has both at least one upper-case
   letter and at least one lower-case letter
 */
-bool Password::has_mixed_case(string pass){
+#include <cctype>
+bool Password::has_mixed_case(string str)
+{
+  bool found = false;
+  for(char c : str){
+    if( !found && c >= 'A' && c <= 'Z' ){
+      found = true;
+    }
+    else if( found && c >= 'a' && c <= 'z'){
+      return true;
+    }
+  }
   return false;
+}
+
+
+unsigned int Password::unique_characters(string str)
+{
+  string letters = "";
+  for (int i = 0; i < str.length(); i++) 
+  {
+    char cur = str[i];
+    for (int j = 0; j < letters.length(); j++) 
+    {
+      if (letters.length() != 0 && letters[j] == cur) 
+      {
+        break;
+      }
+      else if (j == letters.length() - 1) 
+      {
+        letters += cur;
+      }
+    }
+  }
+  return letters.length();
 }
